@@ -18,11 +18,19 @@ server.post("/api/messages", connector.listen());
 
 // inteligencia do bot
 var bot = new botbuilder.UniversalBot(connector, function (session) {
-    session.send("Hello Bot World!");
-    var receivedText = session.message.text;
-    session.send("Vc mandou a mensagem %s", receivedText);
-    var message = new botbuilder.Message(session)
-        .text("Hello bot World 2");
-
-    session.send(message);
+    //    hello world mano
+    //    session.send("Hello Bot World!");
+    //    var receivedText = session.message.text;
+    //    session.send("Vc mandou a mensagem %s", receivedText);
+    //    var message = new botbuilder.Message(session)
+    //        .text("Hello bot World 2");
+    //
+    //    session.send(message);
+    session.beginDialog("showGifs");
 });
+
+bot.dialog("showGifs", [
+    function (session) {
+        botbuilder.Prompt.choice(session, "Oq ce quer hein", "Trending|Search", {} );
+    }
+]);
